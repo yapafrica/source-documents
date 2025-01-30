@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Knowledge - Source Documents & Books of Original Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #quiz-container h2 {
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 15px 0;
+            display: none;
+        }
+        .question input {
+            margin-right: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            display: none;
+        }
+        #result p {
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            #quiz-container {
+                width: 100%;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h2>Test Your Knowledge - You have 10 questions!</h2>
+
+    <button id="startQuizBtn">Start Quiz</button>
+
+    <div id="questions">
+        <div class="question">
+            <p>What is the main purpose of a source document?</p>
+            <label><input type="radio" name="q1" value="a"> To record financial transactions</label><br>
+            <label><input type="radio" name="q1" value="b"> To summarize financial statements</label><br>
+            <label><input type="radio" name="q1" value="c"> To balance the books</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which of the following is a source document?</p>
+            <label><input type="radio" name="q2" value="a"> Invoice</label><br>
+            <label><input type="radio" name="q2" value="b"> Cashbook</label><br>
+            <label><input type="radio" name="q2" value="c"> Trial balance</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which book of original entry records all cash transactions?</p>
+            <label><input type="radio" name="q3" value="a"> Sales Journal</label><br>
+            <label><input type="radio" name="q3" value="b"> Cashbook</label><br>
+            <label><input type="radio" name="q3" value="c"> General Ledger</label><br>
+        </div>
+
+        <div class="question">
+            <p>What type of transaction is recorded in a sales journal?</p>
+            <label><input type="radio" name="q4" value="a"> Credit sales</label><br>
+            <label><input type="radio" name="q4" value="b"> Cash purchases</label><br>
+            <label><input type="radio" name="q4" value="c"> Cash sales</label><br>
+        </div>
+
+        <div class="question">
+            <p>The purchase journal is used to record:</p>
+            <label><input type="radio" name="q5" value="a"> Credit purchases</label><br>
+            <label><input type="radio" name="q5" value="b"> Cash purchases</label><br>
+            <label><input type="radio" name="q5" value="c"> Capital investments</label><br>
+        </div>
+
+        <div class="question">
+            <p>What is the source document for a credit purchase transaction?</p>
+            <label><input type="radio" name="q6" value="a"> Invoice</label><br>
+            <label><input type="radio" name="q6" value="b"> Receipt</label><br>
+            <label><input type="radio" name="q6" value="c"> Cheque</label><br>
+        </div>
+
+        <div class="question">
+            <p>The cash book records:</p>
+            <label><input type="radio" name="q7" value="a"> Only cash receipts</label><br>
+            <label><input type="radio" name="q7" value="b"> Both cash receipts and cash payments</label><br>
+            <label><input type="radio" name="q7" value="c"> Credit transactions</label><br>
+        </div>
+
+        <div class="question">
+            <p>The general journal is used to record:</p>
+            <label><input type="radio" name="q8" value="a"> Cash transactions only</label><br>
+            <label><input type="radio" name="q8" value="b"> Non-routine transactions</label><br>
+            <label><input type="radio" name="q8" value="c"> Sales transactions</label><br>
+        </div>
+
+        <div class="question">
+            <p>Which of the following documents is used as proof for a payment made by cheque?</p>
+            <label><input type="radio" name="q9" value="a"> Receipt</label><br>
+            <label><input type="radio" name="q9" value="b"> Bank statement</label><br>
+            <label><input type="radio" name="q9" value="c"> Cheque stub</label><br>
+        </div>
+
+        <div class="question">
+            <p>The term "books of original entry" refers to:</p>
+            <label><input type="radio" name="q10" value="a"> Financial statements</label><br>
+            <label><input type="radio" name="q10" value="b"> Journals where transactions are first recorded</label><br>
+            <label><input type="radio" name="q10" value="c"> General ledger accounts</label><br>
+        </div>
+
+        <button id="submitBtn" style="display:none;">Submit</button>
+        <button id="retakeQuizBtn" style="display:none;" onclick="retakeQuiz()">Retake Quiz</button>
+    </div>
+
+    <div id="result" style="display:none;">
+        <p id="score"></p>
+    </div>
+</div>
+
+<script>
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultDiv = document.getElementById('result');
+    const scoreText = document.getElementById('score');
+    const questions = document.querySelectorAll('.question');
+    const retakeQuizBtn = document.getElementById('retakeQuizBtn');
+
+    const correctAnswers = {
+        q1: 'a',
+        q2: 'a',
+        q3: 'b',
+        q4: 'a',
+        q5: 'a',
+        q6: 'a',
+        q7: 'b',
+        q8: 'b',
+        q9: 'c',
+        q10: 'b'
+    };
+
+    let score = 0;
+
+    startQuizBtn.addEventListener('click', () => {
+        startQuizBtn.style.display = 'none';
+        questions.forEach(question => question.style.display = 'block');
+        submitBtn.style.display = 'inline-block';
+    });
+
+    submitBtn.addEventListener('click', () => {
+        score = 0;
+        questions.forEach(question => {
+            const selectedAnswer = question.querySelector('input:checked');
+            const questionName = question.querySelector('input').name;
+            if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+                score++;
+            }
+        });
+        scoreText.textContent = `You got ${score} out of ${questions.length}`;
+        resultDiv.style.display = 'block';
+        submitBtn.style.display = 'none';
+        retakeQuizBtn.style.display = 'inline-block';
+    });
+
+    function retakeQuiz() {
+        score = 0;
+        resultDiv.style.display = 'none';
+        questions.forEach(question => {
+            question.style.display = 'none';
+            question.querySelectorAll('input').forEach(input => input.checked = false);
+        });
+        startQuizBtn.style.display = 'inline-block';
+        retakeQuizBtn.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
